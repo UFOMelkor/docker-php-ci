@@ -4,6 +4,6 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
 RUN apt-get install -y ssh libldap2-dev dh-make-php php5-dev build-essential libmagic-dev debhelper
 RUN apt-get install -y libmagickwand-dev --no-install-recommends
+RUN apt-get install -y zlib1g-dev libicu-dev g++
 RUN rm -rf /var/lib/apt/lists/*
 RUN echo "date.timezone = \"Europe/Berlin\"\nmemory_limit=1024M" > /usr/local/etc/php/conf.d/time-configuration.ini
-
