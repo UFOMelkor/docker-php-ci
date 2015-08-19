@@ -8,4 +8,5 @@ RUN apt-get install -y libmagickwand-dev --no-install-recommends
 # Install dependencies for php5-intl
 RUN apt-get install -y zlib1g-dev libicu-dev g++
 RUN rm -rf /var/lib/apt/lists/*
-RUN echo "date.timezone = \"Europe/Berlin\"\nmemory_limit=1024M" > /usr/local/etc/php/conf.d/time-configuration.ini
+RUN echo "date.timezone = \"Europe/Berlin\"" > /usr/local/etc/php/conf.d/time-configuration.ini
+RUN echo "memory_limit=1024M" > /usr/local/etc/php/conf.d/memory-configuration.ini
