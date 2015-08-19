@@ -21,7 +21,7 @@ echo "extension=imagick.so" > /usr/local/etc/php/conf.d/ext-imagick.ini
 ### LDAP
 
 ```bash
-docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/
-docker-php-ext-install ldap
-docker-php-ext-enable ldap
+docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ >/dev/null 2>&1
+docker-php-ext-install ldap >/dev/null 2>&1
+docker-php-ext-enable ldap >/dev/null 2>&1
 ```
