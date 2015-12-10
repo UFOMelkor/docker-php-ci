@@ -1,12 +1,14 @@
 FROM tetraweb/php:5.6
 MAINTAINER Jan Bartel <jan.bartel@atino.de>
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update
-RUN apt-get install -y ssh libldap2-dev dh-make-php php5-dev build-essential libmagic-dev debhelper
-# Install dependencies for php5-imagick
+
+# Install dependencies for intl-ext
+RUN apt-get install -y libicu-dev
+
+# Install imagick (not supported via docker-php-ext-enable, so we will enable it here automatically)
 RUN apt-get install -y libmagickwand-dev --no-install-recommends
-# Install dependencies for php5-intl
-RUN apt-get install -y zlib1g-dev libicu-dev g++
-RUN rm -rf /var/lib/apt/lists/*
-RUN echo "date.timezone = \"Europe/Berlin\"" > /usr/local/etc/php/conf.d/time-configuration.ini
+RUN printf "\n" | pecl install imagick-beta
+RUN echo "extension=imagick.so" > /usr/local/etc/php/conf.d/ext-imagick.ini
+
+# Increase memory limit
 RUN echo "memory_limit=1024M" > /usr/local/etc/php/conf.d/memory-configuration.ini
