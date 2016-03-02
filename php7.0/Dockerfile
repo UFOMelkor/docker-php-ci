@@ -13,6 +13,17 @@ RUN echo "extension=imagick.so" > /usr/local/etc/php/conf.d/ext-imagick.ini
 # Increase memory limit
 RUN echo "memory_limit=1024M" > /usr/local/etc/php/conf.d/memory-configuration.ini
 
+# Install common npm dependencies
+RUN npm install less -g
+RUN npm install uglify-js -g
+RUN npm install uglifycss -g
+RUN npm install yuicompressor -g
+RUN npm install bower -g
+
+# Install ruby dependencies
+RUN apt-get update && apt-get install -y rubygems ruby-dev
+RUN gem install compass
+
 # Add own entrypoint
 COPY entrypoint_atino.sh /entrypoint_atino.sh
 ENTRYPOINT ["/entrypoint_atino.sh"]
