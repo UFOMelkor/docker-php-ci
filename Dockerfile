@@ -3,10 +3,10 @@ MAINTAINER Jan Bartel <jan.bartel@atino.de>
 ENV DEBIAN_FRONTEND noninteractive
 
 # Install dependencies for intl-ext
-RUN apt-get install -y libicu-dev
+RUN apt-get update && apt-get install -y libicu-dev
 
 # Install imagick (not supported via docker-php-ext-enable, so we will enable it here automatically)
-RUN apt-get install -y libmagickwand-dev --no-install-recommends
+RUN apt-get update && apt-get install -y libmagickwand-dev --no-install-recommends
 RUN printf "\n" | pecl install imagick-beta
 RUN echo "extension=imagick.so" > /usr/local/etc/php/conf.d/ext-imagick.ini
 
