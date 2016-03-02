@@ -1,27 +1,11 @@
-# docker-php-ci
+# Docker PHP CI
 
-A ci environment for php applications
+Docker image for a PHP CI environment
 
-## Instructions to install php-extensions:
+This docker image should support you on running your tests under your CI environment.
+It provides many pre-installed tools and can be configured to your needs.
 
-### intl
+You can access the documentation under http://atino-gmbh.github.io/docker-php-ci
 
-```bash
-docker-php-ext-install intl >/dev/null 2>&1
-docker-php-ext-enable intl >/dev/null 2>&1
-```
-
-### Imagick
-
-```bash
-pecl install imagick-beta >/dev/null 2>&1
-echo "extension=imagick.so" > /usr/local/etc/php/conf.d/ext-imagick.ini
-```
-
-### LDAP
-
-```bash
-docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ >/dev/null 2>&1
-docker-php-ext-install ldap >/dev/null 2>&1
-docker-php-ext-enable ldap >/dev/null 2>&1
-```
+A big thanks goes to [Dmitry Lukashin](https://github.com/abcdmitry) for [his great containers](https://github.com/TetraWeb/docker/tree/master/php)
+ which serve as a basis for this container.
