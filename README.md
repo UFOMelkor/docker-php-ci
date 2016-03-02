@@ -1,4 +1,4 @@
-# Docker PHP CI
+# Docker PHP CI [![Build Status](https://travis-ci.org/ATINO-GmbH/docker-php-ci.svg?branch=master)](https://travis-ci.org/ATINO-GmbH/docker-php-ci)
 
 Docker image for a PHP CI environment
 
