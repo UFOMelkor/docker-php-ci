@@ -1,0 +1,16 @@
+language: bash
+services: docker
+sudo: required
+
+env:
+  - VERSION=./
+  - VERSION=php7.0/
+
+before_script:
+  - cd $VERSION
+
+script:
+  - docker build .
+
+after_script:
+  - docker images
