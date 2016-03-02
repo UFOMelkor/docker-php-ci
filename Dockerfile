@@ -12,3 +12,7 @@ RUN echo "extension=imagick.so" > /usr/local/etc/php/conf.d/ext-imagick.ini
 
 # Increase memory limit
 RUN echo "memory_limit=1024M" > /usr/local/etc/php/conf.d/memory-configuration.ini
+
+# Add own entrypoint
+COPY entrypoint_atino.sh /entrypoint_atino.sh
+ENTRYPOINT ["/entrypoint_atino.sh"]
