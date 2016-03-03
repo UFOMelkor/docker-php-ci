@@ -1,2 +1,5 @@
 doc
 README.md
+.travis.yml
+couscous.yml
+.gitignore
