@@ -17,6 +17,6 @@ fi
 
 echo "memory_limit=$MEMORY_LIMIT" > /usr/local/etc/php/conf.d/memory-configuration.ini
 
-/bin/bash /entrypoint.sh
+/entrypoint.sh
 
 exec "$@"
