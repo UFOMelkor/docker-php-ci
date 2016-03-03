@@ -17,11 +17,6 @@ fi
 
 echo "memory_limit=$MEMORY_LIMIT" > /usr/local/etc/php/conf.d/memory-configuration.ini
 
-if [[ ! -z "$WITH_IMAGICK" ]]
-then
-    echo "extension=imagick.so" > /usr/local/etc/php/conf.d/ext-imagick.ini
-fi
-
 /bin/bash /entrypoint.sh
 
 exec "$@"
