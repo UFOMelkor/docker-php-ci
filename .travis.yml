@@ -1,16 +1,25 @@
-language: bash
+language: php
 services: docker
 sudo: required
 
 env:
-  - VERSION=./
-  - VERSION=php7.0/
+    matrix:
+        - VERSION=./
+        - VERSION=php7.0/
+    global:
+        GIT_NAME: "'Couscous auto deploy'"
+        GIT_EMAIL: info@atino.de
+        GH_REF: github.com/ATINO-GmbH/docker-php-ci
+        secure: KjlYRaG3CyY6UyMIQ7CkmmigGOeM+9CPIzpZjaPTTN0C355s861PZzpZC4J8hVF4NkoKazL/UDbgNxb/UZDNswubJfSSxv9lNxyTeejdK5C2nSsVF7EFurPuNOwYacl9uwnPiCOg5T9JKiktC55w4oKzC3zpJeOXAQgFyavCUFpV7+fgKvH3CuYWrufkkdSHMGm4GVzwKtrzrrIZw5QO3l3mgbP3Bki1EgBfkJwj+lDvsCuAmge3ofZR019Opk5d8BsdMNTqO/6fcrQebcn45qM7ny90UBA1H0YXxVNSLfgsnNZon03ulrR8RJc8p0TWDjINiifGnqsvYTx2KauxVKaa/tK21+Gw22p4vtPIlG+kOOQz83aIEJulHfVm8/rAdHbKDxG8j0V/vjDFhHwMd22Zub7GXOzNG5OZHC9nMld2yHfz+MK3xKOk8ObbUIhPKg+E86QuEOxZepau9xuWgAJWvounKJx/SbMwarGazGKrPWcEJaF5NoQOkdkeB1sAMmmG6qlC2pPd1Cql6Xj321P/rhvQVWQD5qk7GDdfyEc16i59R4sslV9aU+lxpe0iBq5SHEL0cuqFXLP9e3750/UNaCz1dZcZb6i2DW1aMRg3Z+iOh3EvdECH0FwyWXch9clT+9B1OwEr/LBTDHGIbdeAQ7qA3f3mZmR9a+PfOyA=
 
 before_script:
-  - cd $VERSION
+    - cd $VERSION
 
 script:
-  - docker build .
+    - docker build .
 
 after_script:
-  - docker images
+    - docker images
+
+after_success:
+    - test $VERSION = "./" && composer require couscous/couscous --no-progress && vendor/bin/couscous travis-auto-deploy
