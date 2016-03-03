@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Docker PHP CI</title>
+
+        <link rel="stylesheet" href="http://atino-gmbh.github.io/docker-php-ci/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://atino-gmbh.github.io/docker-php-ci/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://atino-gmbh.github.io/docker-php-ci/css/highlight.dark.css">
+        <link rel="stylesheet" href="http://atino-gmbh.github.io/docker-php-ci/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="http://atino-gmbh.github.io/docker-php-ci/">
+                Docker PHP CI
+                <small class="hidden-xs hidden-sm">
+                    Docker image for a PHP CI environment
+                </small>
+            </a>
+
+                            <a href="https://github.com/ATINO-GmbH/docker-php-ci">
+                    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+                </a>
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="http://atino-gmbh.github.io/docker-php-ci/index.html">
+                                        <i class="fa fa-fw fa-home"></i> Home
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://atino-gmbh.github.io/docker-php-ci/doc/environment.html">
+                                        <i class="fa fa-fw fa-book"></i> Environment
+                                    </a>
+                                </li>
+                                                            <li class="active">
+                                    <a href="http://atino-gmbh.github.io/docker-php-ci/doc/configuration.html">
+                                        <i class="fa fa-fw fa-wrench"></i> Configuration
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://atino-gmbh.github.io/docker-php-ci/doc/faq.html">
+                                        <i class="fa fa-fw fa-question-circle"></i> FAQ
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1 id="configuration">Configuration</h1>
+<ul>
+<li><a href="#enable-php-extension">Enable PHP extension</a></li>
+<li><a href="#enable-xdebug">Enable XDebug</a></li>
+<li><a href="#configure-php">Configure PHP</a></li>
+<li><a href="#set-memory-limit">Set memory limit</a></li>
+<li><a href="#timezone">Timezone</a></li>
+<li><a href="#disable-composer-self-update">Disable composer self-update</a></li>
+<li><a href="#disable-zip-extension">Disable Zip extension</a></li>
+<li><a href="#set-github-token-for-composer">Set GitHub token for composer</a></li>
+</ul>
+<h2 id="enable-php-extension">Enable PHP Extension</h2>
+<p>To enable an extension run</p>
+<pre><code>docker-php-ext-enable EXTENSION1 EXTENSION2</code></pre>
+<p>Valid extensions are:</p>
+<ul>
+<li>bcmath</li>
+<li>bz2</li>
+<li>calendar</li>
+<li>dba</li>
+<li>enchant</li>
+<li>exif</li>
+<li>ftp</li>
+<li>gd</li>
+<li>gettext</li>
+<li>gmp</li>
+<li>imagick</li>
+<li>imap</li>
+<li>intl</li>
+<li>ldap</li>
+<li>mbstring</li>
+<li>mcrypt</li>
+<li>mongodb</li>
+<li>mysqli</li>
+<li>opcache</li>
+<li>pcntl</li>
+<li>pdo</li>
+<li>pdo_dblib</li>
+<li>pdo_mysql</li>
+<li>pdo_pgsql</li>
+<li>pgsql</li>
+<li>pspell</li>
+<li>shmop</li>
+<li>snmp</li>
+<li>soap</li>
+<li>sockets</li>
+<li>sysvmsg</li>
+<li>sysvsem</li>
+<li>sysvshm</li>
+<li>tidy</li>
+<li>wddx</li>
+<li>xdebug</li>
+<li>xmlrpc</li>
+<li>xsl</li>
+<li>zip</li>
+</ul>
+<h2 id="enable-xdebug">Enable XDebug</h2>
+<p>To enable XDebug for all tasks you can set the environment variable <code>WITH_XDEBUG</code> to <code>1</code>.
+This will not work on PHP 7 because currently there is no XDebug extension available.</p>
+<p>If you want to run it just for a specific setup, you can run</p>
+<pre><code>docker-php-ext-enable xdebug</code></pre>
+<h2 id="configure-php">Configure PHP</h2>
+<p>To configure PHP you have to provide an own <code>php.ini</code> and copy it the configuration folder:</p>
+<pre><code>cp my.ini /usr/local/etc/php/conf.d/my.ini</code></pre>
+<p>The name of your file does not matter as long as it does not override an existing file.</p>
+<h2 id="set-memory-limit">Set memory limit</h2>
+<p>The default memory limit is 1024MB.
+If you want to change this set an environment variable <code>MEMORY_LIMIT</code> e.g. with <code>512M</code>.</p>
+<h2 id="timezone">Timezone</h2>
+<p>By default the <code>UTC</code> timezone will be used. To change this set the environment variable <code>TIMEZONE</code> e.g. to
+<code>Europe/Berlin</code>.</p>
+<h2 id="disable-composer-self-update">Disable composer self-update</h2>
+<p>To disable the composer self-update you can set the environment variable <code>WITHOUT_COMPOSER_SELF_UPDATE</code> to <code>1</code>.</p>
+<h2 id="disable-zip-extension">Disable Zip extension</h2>
+<p>To disable the Zip extension you can set the environment variable <code>WITHOUT_ZIP_EXTENSION</code> to <code>1</code>.</p>
+<h2 id="set-github-token-for-composer">Set GitHub token for composer</h2>
+<p>To set the GitHub token for composer to <a href="https://getcomposer.org/doc/articles/troubleshooting.html#api-rate-limit-and-oauth-tokens">avoid problems with the GitHub API rate limit</a>
+set the environment variable <code>COMPOSER_GITHUB</code> to your token.</p>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>
